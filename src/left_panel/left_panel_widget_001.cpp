@@ -16,16 +16,16 @@ LeftStack001::LeftStack001(QWidget* parent)
 void LeftStack001::setupUI()
 {
     // setStyleSheet(StyleLeftPanel001);
-    QVBoxLayout* layout = new QVBoxLayout();
-    m_btn_open_right_001 = new QPushButton("控件学习");
-    m_btn_open_right_002 = new QPushButton("算法");
-    m_btn_open_right_003 = new QPushButton("右侧窗口【3】");  
+    QVBoxLayout* layout_root = new QVBoxLayout(this);
+    m_btn_open_right_001 = new QPushButton("控件面板1");
+    m_btn_open_right_002 = new QPushButton("控件面板2");
+    m_btn_open_right_003 = new QPushButton("控件面板3");  
 
-    layout->addWidget(m_btn_open_right_001);
-    layout->addWidget(m_btn_open_right_002);
-    layout->addWidget(m_btn_open_right_003);
-    layout->addStretch();    
-    setLayout(layout);    
+    layout_root->addWidget(m_btn_open_right_001);
+    layout_root->addWidget(m_btn_open_right_002);
+    layout_root->addWidget(m_btn_open_right_003);
+    layout_root->addStretch();   
+       
 }
 
 void LeftStack001::connectComponents()

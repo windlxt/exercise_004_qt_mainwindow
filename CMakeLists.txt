@@ -49,6 +49,7 @@ target_include_directories(demo PRIVATE
     ${CMAKE_SOURCE_DIR}/include/left_panel
     ${CMAKE_SOURCE_DIR}/include/right_panel
     ${CMAKE_SOURCE_DIR}/include/utility
+    ${CMAKE_SOURCE_DIR}/include/algorithm
 )
 
 # 5.关键：把cppm放到CXX_MODULES文件集

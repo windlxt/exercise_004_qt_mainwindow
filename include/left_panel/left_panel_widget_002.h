@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iterator> // IWYU pragma: keep
+#include <qpushbutton.h>
 #include <qstackedwidget.h>
 
 class LeftStack002: public QWidget
@@ -12,4 +13,6 @@ public:
 private:
     void setupUI();
     void connectComponents();
+    // 私有成员变量
+    QPushButton* m_btn_producer_comsumer{nullptr};
 };

@@ -6,6 +6,7 @@
 class RightStack001;
 class RightStack002;
 class RightStack003;
+class RightStack021;
 
 class RightPanel: public QWidget
 {
@@ -23,4 +24,6 @@ private:
     RightStack001* right_stack_001;    
     RightStack002* right_stack_002;
     RightStack003* right_stack_003;
+
+    RightStack021* right_stack_021_producer_comsumer;
 };

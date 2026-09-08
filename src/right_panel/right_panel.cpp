@@ -5,6 +5,7 @@
 #include <right_panel_widget_001.h>
 #include <right_panel_widget_002.h>
 #include <right_panel_widget_003.h>
+#include <right_panel_widget_021_producer_comsumer.h>
 #include "utility/msg_broker.h"
 
 RightPanel::RightPanel(QWidget* parent)
@@ -25,17 +26,19 @@ void RightPanel::setupUI()
     right_stack_001 = new RightStack001();
     right_stack_002 = new RightStack002();
     right_stack_003 = new RightStack003();
+    right_stack_021_producer_comsumer = new RightStack021();
 
     m_stack_widget->addWidget(right_stack_001);
     m_stack_widget->addWidget(right_stack_002);
     m_stack_widget->addWidget(right_stack_003); 
+    m_stack_widget->addWidget(right_stack_021_producer_comsumer); 
 }
 
 void RightPanel::connectComponents(){
     // 订阅全局消息
     connect(&MsgBroker::instance(), &MsgBroker::onMessage,
             this, [this](const BrokerMessage& msg){
-        // qDebug() << "RightPanel receive:" << msg.src << msg.cmd;
+        qDebug() << "RightPanel receive:" << msg.src << msg.cmd;
         if(msg.cmd == "open_right_001")
         {
             m_stack_widget->setCurrentWidget(right_stack_001);
@@ -47,6 +50,10 @@ void RightPanel::connectComponents(){
         else if(msg.cmd == "open_right_003")
         {
             m_stack_widget->setCurrentWidget(right_stack_003);
+        }
+        else if(msg.cmd == "open_right_021_producer_comsumer")
+        {
+            m_stack_widget->setCurrentWidget(right_stack_021_producer_comsumer);
         }
         
     }, Qt::QueuedConnection);

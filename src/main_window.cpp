@@ -30,9 +30,9 @@ void MainWindow::setupUI()
 
     // ActivityBar 左边工具栏
     m_activity_bar = new ActivityBar();
-    m_activity_bar->addItem("资源", "资源管理器", 0, true);
-    m_activity_bar->addItem("搜索", "搜索", 1, true);
-    m_activity_bar->addItem("源码", "源代码管理", 2, true);
+    m_activity_bar->addItem("控件", "控件练习", 0, true);
+    m_activity_bar->addItem("算法", "算法", 1, true);
+    m_activity_bar->addItem("数据", "数据库管理", 2, true);
     m_activity_bar->addItem("运行", "运行和调试", 3, false);
     m_activity_bar->addItem("扩展", "扩展", 4, false);
     m_activity_bar->addItem("账户", "账户", 10, false);
