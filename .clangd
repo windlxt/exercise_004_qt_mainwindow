@@ -1,0 +1,16 @@
+CompileFlags:
+  CompilationDatabase: build/compile_commands.json
+  Add:
+    [
+      "-std=c++23",
+      "-fmodules",
+      "-fbuiltin-module-map",
+      "-fimplicit-modules",
+      "-stdlib=libc++"
+    ]
+Diagnostics:
+  UnusedIncludes: Strict
+  Suppress:
+    - clang(module_not_found)
+Index:
+  Background: Build

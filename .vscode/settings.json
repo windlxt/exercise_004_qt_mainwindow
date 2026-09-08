@@ -1,0 +1,12 @@
+{
+    // 使用系统clangd-21
+    "clangd.path": "clangd-21",
+    // 不要在这里写-std，交给.clangd统一管理
+    "clangd.arguments": ["--compile-commands-dir=${workspaceFolder}/build"],
+    // CMake Tools 默认配置
+    "cmake.generator": "Ninja",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.configureOnOpen": false
+    
+    
+}
