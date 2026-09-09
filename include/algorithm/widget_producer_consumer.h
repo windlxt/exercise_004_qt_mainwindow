@@ -44,12 +44,12 @@ private:
     MessageCallback m_msg_cb;
 };
 
-class winProducerComsumer : public QMainWindow
+class winProducerConsumer : public QMainWindow
 {
     Q_OBJECT
 public:
-    winProducerComsumer(QWidget *parent = nullptr);
-    ~winProducerComsumer() override;
+    winProducerConsumer(QWidget *parent = nullptr);
+    ~winProducerConsumer() override;
 
 signals:
     // 给UI追加文本的信号，跨线程安全

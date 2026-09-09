@@ -1,9 +1,8 @@
-#include "algorithm/widget_producer_comsumer.h"
+#include "algorithm/widget_producer_consumer.h"
 #include <QVBoxLayout>
-#include <chrono>
 #include <qcolor.h>
-#include <sstream>
 #include <string>
+#include <utility/global_const_function.h>
 
 ProducerConsumer::~ProducerConsumer()
 {
@@ -53,8 +52,8 @@ void ProducerConsumer::producer_work()
     while(m_running.load())
     {
         // if(!m_msg_cb) break;
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(600));
+        
+        random_sleep();
 
         {
             std::lock_guard<std::mutex> lock(m_mtx);
@@ -68,10 +67,8 @@ void ProducerConsumer::producer_work()
         }
 
         if(m_msg_cb)
-        {
-            std::stringstream ss;
-            ss << "[生产者] 生产: " << item;
-            m_msg_cb(ss.str());
+        {            
+            m_msg_cb(std::format("[生产者] 生产: {}", item));
         }
         m_cv.notify_one();
         item++;
@@ -80,6 +77,8 @@ void ProducerConsumer::producer_work()
 
 void ProducerConsumer::consumer_work()
 {
+    random_sleep();       
+        
     while(m_running.load())
     {
         std::unique_lock<std::mutex> lock(m_mtx);
@@ -99,23 +98,18 @@ void ProducerConsumer::consumer_work()
             auto val = m_queue.front();
             m_queue.pop();
             lock.unlock(); // 尽早释放锁，不要持有锁做耗时操作
-
-            std::this_thread::sleep_for(std::chrono::milliseconds(900));
+            
             if(m_msg_cb)
-            {
-                // std::stringstream ss;
-                // ss << "[消费者] 消费: " << val;
-                // m_msg_cb(ss.str());
-                
-                // std::string s = "[消费者] 消费: " + std::to_string(val);
-                std::string s = std::format("[消费者] 消费: {:03d}", val);
-                m_msg_cb(s);
+            {  
+                // std::string s = "[消费者] 消费: " + std::to_string(val);                
+                m_msg_cb(std::format("[消费者] 消费: {:03d}", val));
             }
+            random_sleep();
         }
     }
 }
 
-winProducerComsumer::winProducerComsumer(QWidget *parent)
+winProducerConsumer::winProducerConsumer(QWidget *parent)
     : QMainWindow(parent)
 {
     this->setWindowTitle("现代C++生产者消费者 QtUI");
@@ -132,10 +126,10 @@ winProducerComsumer::winProducerComsumer(QWidget *parent)
     layout->addWidget(m_btn_stop);
     layout->addWidget(m_text_edit);
 
-    connect(m_btn_start, &QPushButton::clicked, this, &winProducerComsumer::onStartClicked);
-    connect(m_btn_stop, &QPushButton::clicked, this, &winProducerComsumer::onStopClicked);
+    connect(m_btn_start, &QPushButton::clicked, this, &winProducerConsumer::onStartClicked);
+    connect(m_btn_stop, &QPushButton::clicked, this, &winProducerConsumer::onStopClicked);
     // 跨线程信号槽自动QueuedConnection
-    connect(this, &winProducerComsumer::sigAppendText, this, &winProducerComsumer::appendText);
+    connect(this, &winProducerConsumer::sigAppendText, this, &winProducerConsumer::appendText);
 
     // // C++生产者消费者回调，收到消息后发射Qt信号
     // m_pc.setMessageCallback([this](const std::string& msg){
@@ -143,14 +137,15 @@ winProducerComsumer::winProducerComsumer(QWidget *parent)
     // });
 }
 
-winProducerComsumer::~winProducerComsumer()
+winProducerConsumer::~winProducerConsumer()
 {
     m_pc.stop();
 }
 
-void winProducerComsumer::onStartClicked()
+void winProducerConsumer::onStartClicked()
 {
-    // C++生产者消费者回调，收到消息后发射Qt信号
+    // C++生产者消费者回调，收到消息后发射Qt信号。
+    // 纯C++程序线程发射信号，由Qt的UI主线程显示信息。不同线程之间的信息传递。
     m_pc.setMessageCallback([this](const std::string& msg){
         emit sigAppendText(QString::fromStdString(msg));
     });
@@ -159,16 +154,17 @@ void winProducerComsumer::onStartClicked()
     appendText("==== 任务已启动 ====");
 }
 
-void winProducerComsumer::onStopClicked()
+void winProducerConsumer::onStopClicked()
 {
     m_pc.stop();
     appendText("==== 任务已安全停止 ====");
 }
 
-void winProducerComsumer::appendText(const QString &txt)
+void winProducerConsumer::appendText(const QString &txt)
 {
     // m_text_edit->append(txt);
 
+    m_text_edit->ensureCursorVisible(); // 自动滚动文本区域，保证当前光标在视口可见**Qt
     QTextCursor cursor = m_text_edit->textCursor();
     // cursor.movePosition(QTextCursor::End); //光标跳到文档末尾
 
@@ -183,7 +179,7 @@ void winProducerComsumer::appendText(const QString &txt)
     
     fmt.setForeground(txtColor); //文字颜色
     // fmt.setBackground(QColor("#3eb286")); //文字块背景，可选
-    fmt.setFont(QFont("隶书",20));
+    fmt.setFont(QFont("隶书",16));
 
     cursor.insertText(txt + "\n", fmt); //插入带颜色文本+换行     
 }

@@ -2,7 +2,7 @@
 
 #include <iterator> // IWYU pragma: keep
 #include <qstackedwidget.h>
-#include <algorithm/widget_producer_comsumer.h>
+#include <algorithm/widget_producer_consumer.h>
 
 class RightStack021: public QWidget
 {
@@ -14,5 +14,5 @@ private:
     void setupUI();
     void connectComponents();
 
-    winProducerComsumer* m_winProducerComsumer{nullptr};
+    winProducerConsumer* m_winProducerConsumer{nullptr};
 };

@@ -4,11 +4,17 @@
 #include <QString>
 
 inline const QString StyleMainWindow = QStringLiteral(R"( 
-        font-family: "Noto Sans CJK SC";
-        font-size: 20px;
-        font-weight: bold;
-        font-style: normal;
-        color: #ef6d78;
+        QPushButton{            
+            height:48px;
+            color:#f00;
+            font-size:20px;
+            text-align:center;
+            background:transparent;
+            padding:0px;
+        }
+        QLineEdit{
+            background:#2e2e2e;
+        }
     )"
 );
 

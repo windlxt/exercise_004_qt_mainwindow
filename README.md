@@ -1,3 +1,36 @@
+## Qt Widget 控件前缀
+```表格
+控件类	             前缀	        示例
+QPushButton	        btn	    btnOk、btnCancel
+QLabel	            lbl	    lblTitle、lblTipMsg
+QLineEdit	        edt / le	edtUsername、lePassword
+QTextEdit	        txt	    txtLog
+QPlainTextEdit	    pte	    pteCode
+QComboBox	        cbo	    cboLanguage
+QCheckBox	        chk	    chkAutoSave
+QRadioButton	    rdo	    rdoMale
+QGroupBox	        grp	    grpConfig
+QFrame	            fra	    fraCard
+QWidget（自定义容器）  wgt	   wgtSideBar
+QDialog	            dlg	    dlgSetting
+QMainWindow	        win	    winMain
+QSpinBox	        spn	    spnCount
+QDoubleSpinBox	    dsp	    dspScale
+QSlider	            sld	    sldVolume
+QProgressBar	    prg	    prgLoad
+QTableWidget	    tbl	    tblDeviceList
+QTreeWidget	        tre	    treFileTree
+QListWidget	        lst	    lstHistory
+QListView / QTableView / QTreeView	view	viewData
+QScrollArea	        scr	    scrContent
+QTabWidget	        tab	    tabMainPages
+QSplitter	        spl	    splLeftRight
+QMenu	            mnu	    mnuRightClick
+QAction	            act	    actSave
+QToolBar	        tbr	    tbrTool
+QStatusBar	        stb	    stbStatus
+QDockWidget	        dock	dockLogPanel
+```
 ## 一、下载更新clang相关软件
 ```bash
 sudo apt install -y clang lld lldb clangd clang-tidy clang-format libc++-dev libc++abi-dev build-essential
