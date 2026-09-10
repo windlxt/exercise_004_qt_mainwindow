@@ -33,8 +33,8 @@ set(CMAKE_GENERATOR "Ninja")
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 qt_standard_project_setup() # 自动开启AUTOMOC/AUTOUIC/AUTORCC，不用手动写moc
 
-# 开启资源编译
-set(CMAKE_AUTORCC ON)
+# 保留 res.qrc 文件版本
+qt_add_resources(RES_FILES res.qrc)
 
 # 3. 生成可执行文件
 add_executable(demo)
@@ -46,7 +46,7 @@ target_link_libraries(demo PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
 file(GLOB_RECURSE SRC_LISTS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${CMAKE_SOURCE_DIR}/include/*.h ${CMAKE_SOURCE_DIR}/include/*.hpp)
 
-target_sources(demo PRIVATE ${SRC_LISTS} ${HEADER_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/res.qrc)
+target_sources(demo PRIVATE ${SRC_LISTS} ${HEADER_FILES} ${RES_FILES})
 target_include_directories(demo PRIVATE 
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/include/left_panel
@@ -54,14 +54,6 @@ target_include_directories(demo PRIVATE
     ${CMAKE_SOURCE_DIR}/include/utility
     ${CMAKE_SOURCE_DIR}/include/algorithm
 )
-
-# 5.关键：把cppm放到CXX_MODULES文件集
-# target_sources(demo
-#     PRIVATE
-#         FILE_SET CXX_MODULES FILES
-#             src/*.cppm
-# )
-
 
 # ==========新增代码：构建结束后复制 compile_commands.json 到项目根目录==========
 add_custom_command(TARGET demo POST_BUILD

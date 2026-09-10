@@ -2,19 +2,7 @@
     <qresource prefix="/">
         <file>resources/icons/about.ico</file>
         <file>resources/icons/connect.ico</file>
-        <file>resources/icons/contract.ico</file>
-        <file>resources/icons/database.ico</file>
-        <file>resources/icons/editor.ico</file>
         <file>resources/icons/email.ico</file>
-        <file>resources/icons/exit.ico</file>
-        <file>resources/icons/restore.ico</file>
         <file>resources/icons/forum.ico</file>
-        <file>resources/icons/vnpy.ico</file>
-        <file>resources/icons/test.ico</file>
-        <file>resources/gifs/1.gif</file>
-        <file>resources/gifs/2.gif</file>
-        <file>resources/gifs/background.gif</file>
-        <file>resources/gifs/lihua.gif</file>
-        <file>resources/gifs/uploading.gif</file>
     </qresource>
 </RCC>

@@ -16,4 +16,5 @@ private:
     // 私有成员变量
     QPushButton* m_btn_producer_consumer{nullptr};
     QPushButton* m_btn_load_system_font{nullptr};
+    QPushButton* m_btn_time_decorator{nullptr};
 };

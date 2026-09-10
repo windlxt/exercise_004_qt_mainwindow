@@ -8,6 +8,7 @@ class RightStack002;
 class RightStack003;
 class RightStack021;
 class RightStack022;
+class RightStack023;
 
 class RightPanel: public QWidget
 {
@@ -30,6 +31,7 @@ private:
     RightStack003* right_stack_003;
     RightStack021* right_stack_021_producer_consumer;
     RightStack022* right_stack_022_system_font;
+    RightStack023* right_stack_023_time_decorator;
 
     // 字符串和窗口的映射
     std::unordered_map<QString, QWidget*> cmdMap;

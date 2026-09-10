@@ -1,3 +1,9 @@
+## # 清理旧构建目录，清除损坏的ninja缓存
+rm -rf build
+cmake -S . -B build -G Ninja
+cmake --build build
+
+
 ## Qt Widget 控件前缀
 ```表格
 控件类	             前缀	        示例

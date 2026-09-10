@@ -61,16 +61,14 @@ void RightStack022::setupUI()
 void RightStack022::loadFontList(bool onlyChinese)
 {
     m_fontList->clear();
-    QFontDatabase db;
     QStringList families;
     if(onlyChinese){
-        families = db.families(QFontDatabase::SimplifiedChinese);
+        families = QFontDatabase::families(QFontDatabase::SimplifiedChinese);
     }else{
-        families = db.families();
+        families = QFontDatabase::families();
     }
     families.removeDuplicates();
     families.sort(Qt::CaseInsensitive);
-
     for(const QString& family : families)
     {
         QListWidgetItem* item = new QListWidgetItem(family, m_fontList);
