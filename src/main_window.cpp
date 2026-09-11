@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::setupUI()
 {
     setWindowTitle("股票分析系统");
-    resize(1250, 800);
+    resize(1300, 700);
     setStyleSheet(StyleMainWindow);    
     
     // 中心部件
@@ -57,7 +57,7 @@ void MainWindow::setupUI()
 
     m_splitter->addWidget(m_left_panel);
     m_splitter->addWidget(m_right_panel);
-    m_splitter->setSizes({m_last_side_width, 1000});
+    m_splitter->setSizes({m_last_side_width, 1020});
     // m_splitter->setCollapsible(0, true);  // 索引0允许折叠到0    
 
     // 加入布局

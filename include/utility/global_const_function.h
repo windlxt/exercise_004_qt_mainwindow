@@ -5,7 +5,7 @@
 #include <QDebug>
 
 // 1. 随机时间睡眠
-void random_sleep();
+void random_sleep(int a=500, int b=3000);
 
 // 2.计时装饰器
 template<typename Func>

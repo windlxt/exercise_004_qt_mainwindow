@@ -76,7 +76,7 @@ void RightStack023::setupUI()
         // 启动子线程，传入主线程中的this指针作为成员函数对象
         m_work_thread = std::thread(f, this, 1000);
 
-    （3）work函数里：
+    （3）第一种实现方式：work函数里：
         // 任务结束，向主线程发送一条信息，this是主线程传递过来的，修改UI
         QMetaObject::invokeMethod(this, [this](){ 
             // 任务跑完，join回收资源，joinable变为false
@@ -88,7 +88,33 @@ void RightStack023::setupUI()
             m_btn_start_thread->setEnabled(true);
             m_btn_start_thread->setStyleSheet("");        
         }, Qt::QueuedConnection);
+    （4）第2种实现方式：work_signal函数里：
+            emit msg_to_ui(msg);
+        在连接函数中：
+        // 绑定signal信号槽2
+        connect(this, &RightStack023::msg_to_ui,this, [this](QString msg){
+                if(msg != "over")
+                {
+                    m_txt_work_result->append(msg);
+                }                    
+                else
+                {
+                    m_txt_work_result->append(msg);                    
+                    
+                    // 任务跑完，join回收资源，joinable变为false
+                    if(m_work_thread_2.joinable())
+                    {
+                        m_work_thread_2.join();
+                        qDebug() << "线程2资源已回收";
+                    }  
+
+                    m_btn_start_thread_2->setEnabled(true);
+                    m_btn_start_thread_2->setStyleSheet("");
+                }                
+            });    
+
     )";
+    
 
     // 1. 创建标签
     m_lbl_profile = new QLabel(profile);
@@ -289,7 +315,8 @@ void RightStack023::work_signal(int n)
             qDebug() << "子线程收到停止信号，提前退出";
             break;
         }        
-        emit msg_to_ui(QString::fromStdString(std::format("正在运行:{:03d}", i)));
+        // emit msg_to_ui(QString::fromStdString(std::format("正在运行:{:03d}", i)));
+        emit msg_to_ui(QString("正在运行:%1").arg(i, 3, 10, '0'));
         // chrono标准休眠
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
