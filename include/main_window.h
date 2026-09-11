@@ -27,7 +27,7 @@ private:
     RightPanel* m_right_panel{nullptr};
 
     bool m_side_visible = true;
-    int m_last_side_width = 250;
+    int m_last_side_width = 280;
 
     QVariantAnimation* m_anim{nullptr};
     bool m_anim_running = false;
