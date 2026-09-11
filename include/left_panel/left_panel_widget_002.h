@@ -17,6 +17,8 @@ private:
     QPushButton* m_btn_thread_producer_consumer{nullptr};
     QPushButton* m_btn_load_system_font{nullptr};
     QPushButton* m_btn_thread_time_decorator{nullptr};
-    QPushButton* m_btn_thread_class{nullptr};
+    QPushButton* m_btn_thread_worker_mutex{nullptr};
     QPushButton* m_btn_thread_concurrent_futurewatcher{nullptr};
+    QPushButton* m_btn_thread_qtimer{nullptr};
+    QPushButton* m_btn_display_color{nullptr};
 };

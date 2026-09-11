@@ -19,7 +19,7 @@ void MainWindow::setupUI()
 {
     setWindowTitle("股票分析系统");
     resize(1300, 700);
-    setStyleSheet(StyleMainWindow);    
+    // setStyleSheet(StyleMainWindow);    
     
     // 中心部件
     QWidget* central_widget = new QWidget(this);

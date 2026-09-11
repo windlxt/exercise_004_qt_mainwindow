@@ -5,7 +5,6 @@
 #include <qpushbutton.h>
 #include <qstackedwidget.h>
 #include <qstyle.h>
-#include <thread>
 
 class QTextEdit;
 class QLabel;

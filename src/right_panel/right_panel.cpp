@@ -10,6 +10,8 @@
 #include <right_panel_widget_023_time_decorator.h>
 #include <right_panel_widget_024_thread_class.h>
 #include <right_panel_widget_025_concurrent_futurewatcher.h>
+#include <right_panel_widget_026_thread_qtimer.h>
+#include <right_panel_widget_027_display_color.h>
 #include "utility/msg_broker.h"
 
 RightPanel::RightPanel(QWidget* parent)
@@ -34,8 +36,10 @@ void RightPanel::setupUI()
     right_stack_021_producer_consumer = new RightStack021();
     right_stack_022_system_font = new RightStack022();
     right_stack_023_time_decorator = new RightStack023();
-    right_stack_024_thread_class = new RightStack024();
+    right_stack_024_thread_worker_mutex = new RightStack024();
     right_stack_025_concurrent_futurewatcher = new RightStack025();
+    right_panel_widget_026_thread_qtimer = new RightStack026();
+    right_panel_widget_027_display_color = new RightStack027();
 
     // 2.加入层叠控件
     m_stack_widget->addWidget(right_stack_001);
@@ -44,8 +48,10 @@ void RightPanel::setupUI()
     m_stack_widget->addWidget(right_stack_021_producer_consumer); 
     m_stack_widget->addWidget(right_stack_022_system_font);
     m_stack_widget->addWidget(right_stack_023_time_decorator);
-    m_stack_widget->addWidget(right_stack_024_thread_class);
+    m_stack_widget->addWidget(right_stack_024_thread_worker_mutex);
     m_stack_widget->addWidget(right_stack_025_concurrent_futurewatcher);
+    m_stack_widget->addWidget(right_panel_widget_026_thread_qtimer);
+    m_stack_widget->addWidget(right_panel_widget_027_display_color);
 
     // 3.字符串与窗口对象之间的映射
     cmdMap = {
@@ -55,8 +61,10 @@ void RightPanel::setupUI()
         {"open_right_021_producer_consumer", right_stack_021_producer_consumer},
         {"open_right_022_system_font", right_stack_022_system_font},
         {"open_right_023_time_decorator",right_stack_023_time_decorator},
-        {"open_right_024_thread_class",right_stack_024_thread_class},
-        {"open_right_025_concurrent_futurewatcher",right_stack_025_concurrent_futurewatcher}
+        {"open_right_024_thread_worker_mutex",right_stack_024_thread_worker_mutex},
+        {"open_right_025_concurrent_futurewatcher",right_stack_025_concurrent_futurewatcher},
+        {"open_right_026_thread_qtimer",right_panel_widget_026_thread_qtimer},
+        {"open_right_027_display_color",right_panel_widget_027_display_color}
     };
 }
 
