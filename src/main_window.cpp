@@ -1,6 +1,7 @@
 #include "main_window.h"
 #include "left_panel.h"
 #include "right_panel.h"
+#include <qdebug.h>
 #include <utility/splitter_custom.h>
 #include <QLabel>
 #include <QHBoxLayout>
@@ -17,9 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::setupUI()
 {
-    setWindowTitle("股票分析系统");
-    resize(1300, 700);
-    // setStyleSheet(StyleMainWindow);    
+    setWindowTitle("股票分析系统");    
+    setFixedSize(1300,700); //设置初始固定大小，防止窗口出现闪动变大
+    setStyleSheet(StyleMainWindow);    
     
     // 中心部件
     QWidget* central_widget = new QWidget(this);
@@ -30,20 +31,22 @@ void MainWindow::setupUI()
 
     // ActivityBar 左边工具栏
     m_activity_bar = new ActivityBar();
-    m_activity_bar->addItem("控件", "控件练习", 0, true);
-    m_activity_bar->addItem("算法", "算法", 1, true);
-    m_activity_bar->addItem("数据", "数据库管理", 2, true);
-    m_activity_bar->addItem("运行", "运行和调试", 3, false);
-    m_activity_bar->addItem("扩展", "扩展", 4, false);
+    m_activity_bar->addItem("控件", "控件练习", 1, true);
+    m_activity_bar->addItem("算法", "算法", 2, true);
+    m_activity_bar->addItem("数据", "数据库管理", 3, true);
+    m_activity_bar->addItem("运行", "运行和调试", 4, false);
+    m_activity_bar->addItem("扩展", "扩展", 5, false);
     m_activity_bar->addItem("账户", "账户", 10, false);
-    m_activity_bar->addItem("管理", "管理", 11, false);    
+    m_activity_bar->addItem("管理", "管理", 11, false);
+    m_left_panel_id_set = {1, 2, 3, 4, 5, 10, 11}; 
+    m_activity_bar->getButtonById(1)->setChecked(true); //第1个按钮显示选中状态
 
-    // 左侧边面板
-    m_left_panel = new LeftPanel();
+    // 左侧边面板    
+    m_left_panel = new LeftPanel();     
     m_left_panel->setStyleSheet("background:#252526;");
     m_left_panel->setMinimumWidth(0);
     m_left_panel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Expanding);
-
+    
     // 右侧边面板
     m_right_panel = new RightPanel();
     m_right_panel->setStyleSheet("background:#1e1e1e;");    
@@ -72,6 +75,10 @@ void MainWindow::setupUI()
 
 void MainWindow::connectComponents()
 {
+    // 预装载信号连接
+    connect(this, &MainWindow::preload_panel, m_left_panel,&LeftPanel::preload_left_stack_widget, Qt::QueuedConnection);
+    connect(this, &MainWindow::preload_panel, m_right_panel,&RightPanel::preload_right_stack_widget, Qt::QueuedConnection);
+
     // ActivityBar点击逻辑
     connect(m_activity_bar, &ActivityBar::itemClicked, this, [this](int id){
         if(m_anim_running)
@@ -82,8 +89,9 @@ void MainWindow::connectComponents()
             return;
 
         // 没有对应页面，直接返回
-        if(id >= m_left_panel->stackWidget()->count())
+        if(!m_left_panel_id_set.contains(id))
         {
+            qDebug()<<"没有对应页面，直接返回";
             return;
         }
 
@@ -124,7 +132,9 @@ void MainWindow::connectComponents()
                 m_anim_running = true;
                 m_splitter->setEnabled(false);
             }
-            m_left_panel->stackWidget()->setCurrentIndex(id);
+            // m_left_panel->stackWidget()->setCurrentIndex(id);
+            m_left_panel->open_id_left_stack_widget(id);
+
             m_side_visible = true;
         }
     });

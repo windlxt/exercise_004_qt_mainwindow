@@ -6,6 +6,7 @@
 #include <QSplitter>
 #include <QVariantAnimation>
 #include <qmainwindow.h>
+#include <QSet>
 
 class LeftPanel;
 class RightPanel;
@@ -15,6 +16,9 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 public:
     MainWindow(QWidget *parent = nullptr);
+
+signals:
+    void preload_panel();
     
 private:
     void setupUI();
@@ -31,5 +35,7 @@ private:
 
     QVariantAnimation* m_anim{nullptr};
     bool m_anim_running = false;
-    int m_activePanelId = -1; // 记录当前激活的面板id，-1无选中
+    int m_activePanelId = 1; // 记录当前激活的面板id，-1无选中
+
+    QSet<int> m_left_panel_id_set; // 左侧面板id集合
 };

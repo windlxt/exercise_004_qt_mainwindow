@@ -1,4 +1,4 @@
-## # 清理旧构建目录，清除损坏的ninja缓存
+## 清理旧构建目录，清除损坏的ninja缓存
 rm -rf build
 cmake -S . -B build -G Ninja
 cmake --build build

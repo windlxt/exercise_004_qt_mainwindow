@@ -19,7 +19,7 @@ RightStack001::RightStack001(QWidget* parent)
 }
 
 void RightStack001::setupUI()
-{
+{    
     QGridLayout* layout_root = new QGridLayout(this);    
     // ===== 外边距：layout 和父widget边框之间距离（上下左右）
     layout_root->setContentsMargins(12, 12, 12, 12);
@@ -47,7 +47,7 @@ void RightStack001::setupUI()
     groupLayout->addWidget(radio1);
     groupLayout->addWidget(radio2);
     groupLayout->addWidget(radio3);
-    // groupLayout->addStretch(1);
+    groupLayout->addStretch(1);
 
     // 2. 文本框
     m_textEdit = new QTextEdit();    
@@ -55,7 +55,7 @@ void RightStack001::setupUI()
 
     // 3. 按钮
     QPushButton* m_btn_example = new QPushButton("第一个例子！");
-    QLabel* m_lbl_001 = new QLabel("占位标签");
+    QLabel* m_lbl_001 = new QLabel("占位标签");    
 
     layout_root->addWidget(groupBox, 0, 0, 3,1);    
     layout_root->addWidget(m_textEdit, 0, 1, 3,1);
@@ -63,15 +63,14 @@ void RightStack001::setupUI()
     layout_root->addWidget(m_lbl_001, 4,0, 1, 2);
 
     // 设置拉伸权重
-    layout_root->setRowStretch(0, 0);
-    layout_root->setRowStretch(1, 0);
-    layout_root->setRowStretch(2, 0);
-    layout_root->setRowStretch(3, 0);
-    layout_root->setRowStretch(4, 1);
+    layout_root->setRowStretch(0, 1);
+    layout_root->setRowStretch(1, 1);
+    layout_root->setRowStretch(2, 1);
+    layout_root->setRowStretch(3, 1);
+    layout_root->setRowStretch(4, 2);
 
     layout_root->setColumnStretch(0, 1);
-    layout_root->setColumnStretch(1, 3);
-        
+    layout_root->setColumnStretch(1, 3);        
 }
 
 void RightStack001::connectComponents()
