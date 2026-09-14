@@ -51,7 +51,7 @@ void RightStack001::setupUI()
 
     // 2. 文本框
     m_textEdit = new QTextEdit();    
-    m_textEdit->setStyleSheet(StyleTextEdit);
+    // m_textEdit->setStyleSheet(StyleTextEdit);
 
     // 3. 按钮
     QPushButton* m_btn_example = new QPushButton("第一个例子！");

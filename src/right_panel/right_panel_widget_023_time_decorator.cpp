@@ -48,7 +48,7 @@ RightStack023::~RightStack023()
 
 void RightStack023::setupUI()
 {       
-    QVBoxLayout* layout = new QVBoxLayout();
+    QVBoxLayout* layout = new QVBoxLayout(this);
 
     // 1.打开文件对话框，显示文件路径和内容
     QHBoxLayout* layout_read_file = new QHBoxLayout();
@@ -59,7 +59,7 @@ void RightStack023::setupUI()
     layout_read_file->addWidget(m_le_file_path);
 
     m_txt_code = new QTextEdit();
-    m_txt_code->setFixedHeight(120);
+    m_txt_code->setFixedHeight(80);
     m_txt_code->setTextColor(Qt::darkGreen);    
 
     //  创建多线程代码简介======================================
@@ -118,9 +118,11 @@ void RightStack023::setupUI()
 
     // 1. 创建标签
     m_lbl_profile = new QLabel(profile);
-    m_lbl_profile->setStyleSheet(R"(
-        font-size: 20px;
-    )");
+
+    // m_lbl_profile->setStyleSheet(R"(
+    //     font-size: 20px;
+    // )");
+
     // 关键：让QLabel自适应文本高度，不要固定死高度，否则不会滚动
     m_lbl_profile->setWordWrap(true); // 文字自动换行（长文本必备）
     m_lbl_profile->setAlignment(Qt::AlignTop | Qt::AlignLeft);
@@ -131,71 +133,96 @@ void RightStack023::setupUI()
     m_scroll_profile->setWidgetResizable(true); // 让内部widget跟随scrollarea宽度变化
 
     // 3. 设置滚动区域固定可视高度500px（就是你原来想要的可视窗口大小）
-    m_scroll_profile->setFixedHeight(350);
-    m_scroll_profile->setStyleSheet(R"(
-        QScrollArea { border:none; }
-        QScrollBar:vertical { width:8px; background:#f1f1f1; }
-        QScrollBar::handle:vertical { background:#bbbbbb; border-radius:4px; }
-        QScrollBar::handle:vertical:hover { background:#999999; }
-    )");
+    m_scroll_profile->setFixedHeight(250);
+    // m_scroll_profile->setStyleSheet(R"(
+    //     QScrollArea { border:none; }
+    //     QScrollBar:vertical { width:8px; background:#f1f1f1; }
+    //     QScrollBar::handle:vertical { background:#bbbbbb; border-radius:4px; }
+    //     QScrollBar::handle:vertical:hover { background:#999999; }
+    // )");
     // ====以上是多线程代码简介===========================
 
     // 3.程序运行时间展示
     m_lb_time = new QLabel("程序运行时间：");    
-    m_lb_time->setStyleSheet(R"(QLabel{
-        color: #ffffff;
-        font-size:30px;
-        background-color:transparent;
-    }
-    )");
+    // m_lb_time->setStyleSheet(R"(QLabel{
+    //     color: #ffffff;
+    //     font-size:30px;
+    //     background-color:transparent;
+    // }
+    // )");
 
     m_le_time_result = new QLineEdit();
-    m_le_time_result->setStyleSheet(R"(QLineEdit{
-        color: #ffffff;
-        font-size:30px;
-        background-color:gray;
-        border:1px solid #444444;
-        border-radius:8px;
-        padding: 6px 12px;
-    }
-    )");
+    // m_le_time_result->setStyleSheet(R"(QLineEdit{
+    //     color: #ffffff;
+    //     font-size:30px;
+    //     background-color:gray;
+    //     border:1px solid #444444;
+    //     border-radius:8px;
+    //     padding: 6px 12px;
+    // }
+    // )");
     m_le_time_result->setPlaceholderText("因使用了计时装饰器，无法在主窗口线程获取运行时间");
     
     m_btn_start_thread_1 = new QPushButton("方式一：开始新的线程");
 
     ///////一条带颜色的横线////////////////////////////////////
-    QFrame* line = new QFrame(this);
-    line->setFrameShape(QFrame::HLine);    // 水平线条
-    line->setFrameShadow(QFrame::Plain);
-    line->setStyleSheet(R"(
-        QFrame {
-            background-color: #0b9a5f;
-            min-height:1px;
-            max-height:1px;
-        }
-    )");
+    QFrame* line1 = new QFrame(this);
+    line1->setFrameShape(QFrame::HLine);    // 水平线条
+    line1->setFrameShadow(QFrame::Plain);
+    // line1->setStyleSheet(R"(
+    //     QFrame {
+    //         background-color: #0b9a5f;
+    //         min-height:1px;
+    //         max-height:1px;
+    //     }
+    // )");   
+    ///////第二条带颜色的横线////////////////////////////////////
+    QFrame* line2 = new QFrame(this);
+    line2->setFrameShape(QFrame::HLine);    // 水平线条
+    line2->setFrameShadow(QFrame::Plain);
+    // line2->setStyleSheet(R"(
+    //     QFrame {
+    //         border: none;
+    //         border-top: 1px solid #0b9a5f;
+    //         min-height:1px;
+    //         max-height:1px;
+    //     }
+    // )");
+    ///////第二条带颜色的横线////////////////////////////////////
+    QFrame* line3 = new QFrame(this);
+    line3->setFrameShape(QFrame::HLine);    // 水平线条
+    line3->setFrameShadow(QFrame::Plain);
+    // line3->setStyleSheet(R"(
+    //     QFrame {
+    //         border: none;
+    //         border-top: 1px solid #0b9a5f;
+    //         min-height:1px;
+    //         max-height:1px;
+    //     }
+    // )");
+
     // 第二种方式，用信号槽多次传递信息////////////////////////
     QHBoxLayout* layout_2 = new QHBoxLayout();
     m_txt_work_result = new QTextEdit();
-    m_txt_work_result->setStyleSheet(R"(
-        QTextEdit {
-            background-color: #76c7e8;
-            color: #f24425;
-        }
-    )");
+    // m_txt_work_result->setStyleSheet(R"(
+    //     QTextEdit {
+    //         background-color: #76c7e8;
+    //         color: #f24425;
+    //     }
+    // )");
     m_btn_start_thread_2 = new QPushButton("方式二：开始新的线程[信号槽]");
-    m_btn_start_thread_2->setStyleSheet(R"(
-        QPushButton {
-            padding: 6px 12px;            
-        }
-        QPushButton:hover {
-            background-color:#e8e8e8;
-        }
-        QPushButton:disabled {
-            color:#999;
-            background-color:#eeeeee;
-        }
-    )");
+    // m_btn_start_thread_2->setStyleSheet(R"(
+    //     QPushButton {
+    //         padding: 4px 8px;            
+    //     }
+    //     QPushButton:hover {
+    //         background-color:#e8e8e8;
+    //     }
+    //     QPushButton:disabled {
+    //         color:#999;
+    //         background-color:#eeeeee;
+    //     }
+    // )");
 
     layout_2->addWidget(m_txt_work_result);
     layout_2->addWidget(m_btn_start_thread_2);
@@ -203,18 +230,18 @@ void RightStack023::setupUI()
 
     layout->addLayout(layout_read_file);
     layout->addWidget(m_txt_code);
-    layout->addWidget(line);
+    layout->addWidget(line1);    
     layout->addWidget(m_scroll_profile);
+    layout->addWidget(line2);
     layout->addWidget(m_lb_time);
     layout->addWidget(m_le_time_result);
     layout->addWidget(m_btn_start_thread_1);
-    layout->addWidget(line);
-    layout->addStretch();
+    layout->addWidget(line3);
+    // layout->addStretch();
     layout->addLayout(layout_2);
     
-    layout->setSpacing(20); // 控件之间的间隔
-    layout->setContentsMargins(50,50,50,50);// 左上右下
-    setLayout(layout);    
+    layout->setSpacing(5); // 控件之间的间隔
+    layout->setContentsMargins(10,10,10,10);// 左上右下      
 }
 
 //点击读取文件按钮槽函数
@@ -281,7 +308,7 @@ void RightStack023::work(int n)
         }  
 
         m_btn_start_thread_1->setEnabled(true);
-        m_btn_start_thread_1->setStyleSheet("");        
+        // m_btn_start_thread_1->setStyleSheet("");        
     }, Qt::QueuedConnection);
 }
 
@@ -301,7 +328,7 @@ void RightStack023::on_start_thread_1()
     m_work_thread_1 = std::thread(f, this, 1000);
 
     m_btn_start_thread_1->setEnabled(false);
-    m_btn_start_thread_1->setStyleSheet("color:gray");
+    // m_btn_start_thread_1->setStyleSheet("color:gray");
 }
 
 //第二种方式，用信号槽实现多次传递信息////////////////////
@@ -340,7 +367,7 @@ void RightStack023::on_start_thread_2()
     m_work_thread_2 = std::thread(f, this, 500);
 
     m_btn_start_thread_2->setEnabled(false);
-    m_btn_start_thread_2->setStyleSheet("color:gray");
+    // m_btn_start_thread_2->setStyleSheet("color:gray");
 }
 
 ////////////////////////////////////////////////////////
@@ -380,7 +407,7 @@ void RightStack023::connectComponents()
                     }  
 
                     m_btn_start_thread_2->setEnabled(true);
-                    m_btn_start_thread_2->setStyleSheet("");
+                    // m_btn_start_thread_2->setStyleSheet("");
                 }                
             });    
 }

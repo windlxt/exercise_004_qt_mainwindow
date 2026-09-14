@@ -26,7 +26,7 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
-    const qreal m_normalW = 1.0;
+    const qreal m_normalW = 2.0;
     const qreal m_hoverW = 5.0;
     const QColor m_normalColor{0x44,0x44,0x44};
     const QColor m_hoverColor{0x71,0xa1,0xef};

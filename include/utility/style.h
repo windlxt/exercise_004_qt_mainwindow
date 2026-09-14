@@ -3,23 +3,41 @@
 #include <iterator>     // IWYU pragma: keep
 #include <QString>
 
-inline const QString StyleMainWindow = QStringLiteral(R"( 
-        QPushButton{            
-            height:48px;
-            color:#f00;
-            font-size:20px;
-            text-align:center;
+/* QSS应用位置优先级（从高到低）
+
+1. 控件自身 setStyleSheet（最高，覆盖一切父级、全局）
+2. 父容器控件 setStyleSheet
+3. 祖父容器
+4. qApp->setStyleSheet() 全局样式（最低）Qt文档
+
+QSS 默认不会自动继承颜色、字体！如果想让子控件继承：`#parent, #parent * {color:red;}` 同时写父和全部后代。
+*/
+
+inline const QString StyleActivityBar = QStringLiteral(R"(         
+        #activityBar QPushButton{
+            border: 0px solid transparent;
+            border-left:3px solid transparent; /* 预留左边3px占位，未激活透明 */
+            min-width: 48px;
+            min-height: 48px;
+            color:#858585;
             background:transparent;
-            padding:0px;
+            font-size:14px;
+            text-align:center;
+            margin: 2px 0;
+            padding:0px;            
         }
-        QLineEdit{
-            background:#2e2e2e;
+        #activityBar QPushButton:hover{color:#cccccc;background:#3c3c3c;}
+        #activityBar QPushButton:checked{
+            color:#ffffff;
+            background:#2c2c2c;
+            border-left:3px solid #007acc;
         }
     )"
 );
 
+// 个别的样式 ===================================================
 inline const QString StyleTextEdit = QStringLiteral(R"(
-        QTextEdit {
+        #textDisplayArea {
             /* 背景底色 */
             background-color: #63b7ad;
             /* 文字颜色 */
@@ -33,66 +51,18 @@ inline const QString StyleTextEdit = QStringLiteral(R"(
             /* 字体 */
             font-family: "Noto Sans CJK SC";
             font-size: 20px;
+            margin: 5px 5px; /* 上下，左右 */
+
         }
         /* 焦点状态：点击选中时高亮边框 */
-        QTextEdit:focus {
-            border: 3px solid #2196F3;
+        #textDisplayArea:focus {
+            border: 3px solid #2196F3;            
         }
         /* 只读状态样式 */
-        QTextEdit[readOnly="true"] {
+        #textDisplayArea [readOnly="true"] {
             background-color: #f6f6f6;
             color: #666666;
         }
-    )"
-);
-
-inline const QString StyleActivityBar = QStringLiteral(R"( 
-        ActivityBar{background-color:#333333;}
-        QPushButton{
-            border:none;
-            width:48px;height:48px;
-            color:#858585;
-            font-size:20px;
-            text-align:center;
-            background:transparent;
-            padding:0px;
-        }
-        QPushButton:hover{color:#cccccc;background:#3c3c3c;}
-        QPushButton:checked{
-            color:#ffffff;
-            background:#2c2c2c;
-            border-left:3px solid #007acc;
-        }
-    )"
-);
-
-inline const QString StyleSplitter = QStringLiteral(R"(
-        QSplitter::handle{background:#444;width:1px;}        
-        /* 水平QSplitter，handle是竖线，设置绘制宽度 */
-        QSplitter::handle:horizontal {
-            width: 2px;
-        }
-        /* 垂直QSplitter，handle是横线，设置绘制高度 */
-        QSplitter::handle:vertical {
-            height: 2px;
-        }
-        /* hover悬停样式 */
-        QSplitter::handle:horizontal:hover {
-            background-color: #007acc;            
-        }
-    )"
-);
-
-inline const QString StyleLeftPanel001 = QStringLiteral(R"(        
-        QPushButton{            
-            width:48px;height:48px;
-            color:#007acc;
-            font-size:20px;
-            text-align:center;            
-            padding:5px;
-            margin:10px;
-        }
-        QPushButton:hover{color:#cccccc;background:#3c3c3c;}
     )"
 );
 
@@ -106,3 +76,7 @@ inline const QString StyleLeftPanel001 = QStringLiteral(R"(
 `#pragma once`：**预处理阶段，防止同一个头文件在同一个 cpp 内被重复 include**
 `inline变量(C++17)`：**链接阶段，允许多个不同 cpp 都定义这个全局变量，链接合并成一份**
 */
+
+
+// 声明应用主题调色板全局函数
+void applyTheme(const QString& theme);

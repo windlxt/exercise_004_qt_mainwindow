@@ -10,12 +10,12 @@ ActivityBar::ActivityBar(QWidget *parent)
 
     QVBoxLayout* main_lay = new QVBoxLayout(this);
     main_lay->setContentsMargins(0,8,0,8);
-    main_lay->setSpacing(4);
+    main_lay->setSpacing(0);
 
     m_layout_top = new QVBoxLayout();
-    m_layout_top->setSpacing(4);
+    m_layout_top->setSpacing(0);
     m_layout_bottom = new QVBoxLayout();
-    m_layout_bottom->setSpacing(4);
+    m_layout_bottom->setSpacing(0);
 
     m_btn_panel_group = new QButtonGroup(this);
     m_btn_panel_group->setExclusive(false);

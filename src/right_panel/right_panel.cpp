@@ -10,7 +10,7 @@
 #include <right_panel_widget_021_producer_consumer.h>
 #include <right_panel_widget_022_system_font.h>
 #include <right_panel_widget_023_time_decorator.h>
-#include <right_panel_widget_024_thread_class.h>
+#include <right_panel_widget_024_thread_worker.h>
 #include <right_panel_widget_025_concurrent_futurewatcher.h>
 #include <right_panel_widget_026_thread_qtimer.h>
 #include <right_panel_widget_027_display_color.h>

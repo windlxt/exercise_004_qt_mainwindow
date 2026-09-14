@@ -9,7 +9,7 @@
 #include <qpushbutton.h>
 #include <qstackedwidget.h>
 #include <qtextedit.h>
-#include <right_panel_widget_024_thread_class.h>
+#include <right_panel_widget_024_thread_worker.h>
 #include <QLabel>
 #include <QLineEdit>
 #include <QFileDialog>
@@ -154,17 +154,13 @@ RightStack024::~RightStack024()
 
 void RightStack024::setupUI()
 {
-    setStyleSheet(R"(
-        QPushButton:hover{
-            background:#2c8d55;
-        }
-    )");
     QVBoxLayout* layout_root = new QVBoxLayout(this);
     QHBoxLayout* layout_btn = new QHBoxLayout();
 
     m_btn_start = new QPushButton("开始生产消费");
     m_btn_stop = new QPushButton("停止生产消费");
     m_txt_display_area = new QTextEdit();
+    m_txt_display_area->setObjectName("textDisplayArea");
     m_txt_display_area->setStyleSheet(StyleTextEdit);
 
     layout_btn->addWidget(m_btn_start);

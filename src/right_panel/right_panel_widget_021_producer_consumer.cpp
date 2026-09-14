@@ -54,9 +54,9 @@ void RightStack021::setupUI()
 
     // 1. 创建标签
     m_lbl_profile = new QLabel(profile);
-    m_lbl_profile->setStyleSheet(R"(
-        font-size: 20px;
-    )");
+    // m_lbl_profile->setStyleSheet(R"(
+    //     font-size: 20px;
+    // )");
     // 关键：让QLabel自适应文本高度，不要固定死高度，否则不会滚动
     m_lbl_profile->setWordWrap(true); // 文字自动换行（长文本必备）
     m_lbl_profile->setAlignment(Qt::AlignTop | Qt::AlignLeft);
@@ -68,12 +68,12 @@ void RightStack021::setupUI()
 
     // 3. 设置滚动区域固定可视高度500px（就是你原来想要的可视窗口大小）
     m_scroll_profile->setFixedHeight(350);
-    m_scroll_profile->setStyleSheet(R"(
-        QScrollArea { border:none; }
-        QScrollBar:vertical { width:8px; background:#f1f1f1; }
-        QScrollBar::handle:vertical { background:#bbbbbb; border-radius:4px; }
-        QScrollBar::handle:vertical:hover { background:#999999; }
-    )");
+    // m_scroll_profile->setStyleSheet(R"(
+    //     QScrollArea { border:none; }
+    //     QScrollBar:vertical { width:8px; background:#f1f1f1; }
+    //     QScrollBar::handle:vertical { background:#bbbbbb; border-radius:4px; }
+    //     QScrollBar::handle:vertical:hover { background:#999999; }
+    // )");
     // ====以上是多线程代码简介===========================
 
 

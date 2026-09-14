@@ -27,6 +27,9 @@ void RightStack022::setupUI()
     m_cmbFilter = new QComboBox();
     m_cmbFilter->addItems({"全部字体", "仅简体中文字体"});
     m_fontList = new QListWidget();
+    // 设置 FontDelegate
+    m_fontList->setItemDelegate(new FontDelegate);
+
     leftLayout->addWidget(m_cmbFilter);
     leftLayout->addWidget(m_fontList);
 
@@ -49,7 +52,7 @@ void RightStack022::setupUI()
 
     m_previewLabel = new QLabel("预览文字\nChina is a great country\n天地玄黄，宇宙洪荒");
     m_previewLabel->setAlignment(Qt::AlignCenter);
-    m_previewLabel->setStyleSheet("border:1px solid #aaa; padding:20px;");
+    // m_previewLabel->setStyleSheet("border:1px solid #aaa; padding:20px;");
     rightLayout->addLayout(optLayout);
     rightLayout->addWidget(m_previewLabel);
     rightLayout->addStretch();
@@ -71,9 +74,12 @@ void RightStack022::loadFontList(bool onlyChinese)
     families.sort(Qt::CaseInsensitive);
     for(const QString& family : families)
     {
-        QListWidgetItem* item = new QListWidgetItem(family, m_fontList);
-        QFont font(family, 12);
-        item->setFont(font);
+        // QListWidgetItem* item = new QListWidgetItem(family, m_fontList);
+        // QFont font(family, 12);
+        // item->setFont(font);
+
+        //只需添加字体字符串，等绘制时，再利用 FontDelegate 生成字体。
+        new QListWidgetItem(family, m_fontList);
     }
 }
 

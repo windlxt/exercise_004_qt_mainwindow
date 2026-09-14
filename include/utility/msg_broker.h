@@ -12,6 +12,7 @@ struct BrokerMessage
     QString cmd;        // 命令字
     QVariant payload;   // 载荷，可以传任意类型
 };
+
 Q_DECLARE_METATYPE(BrokerMessage)
 
 class MsgBroker : public QObject

@@ -4,7 +4,7 @@ cmake -S . -B build -G Ninja
 cmake --build build
 
 
-## Qt Widget 控件前缀
+## Qt Widget 控件前缀规范
 ```表格
 控件类	             前缀	        示例
 QPushButton	        btn	    btnOk、btnCancel
